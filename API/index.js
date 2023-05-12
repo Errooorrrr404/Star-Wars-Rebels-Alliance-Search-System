@@ -23,6 +23,12 @@ const start = async () => {
             host: process.env.HOST || 'localhost',
             query: {
                 parser: (query) => Qs.parse(query)
+            },
+            "routes": {
+                "cors": {
+                    origin: ['*'] // an array of origins or 'ignore'
+
+                }
             }
         });
 
