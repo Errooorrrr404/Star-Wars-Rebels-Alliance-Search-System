@@ -3,7 +3,7 @@ import SearchPage from "../search/SearchPage";
 function VehiclesPage() {
     return (
         <div>
-            <h1>Page de Recherche des Véhicules</h1>
+            <h1>Base de données des Véhicules de la Galaxie</h1>
             <SearchPage type="vehicles" />
         </div>
     )

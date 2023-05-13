@@ -20,6 +20,7 @@ import StarshipDetailsPage from "./pages/starships/details";
 import FilmPage from "./pages/films";
 import PlanetsPage from "./pages/planets";
 import StarshipsPage from "./pages/starships";
+import NotFoundPage from "./pages/errors/NotFound";
 
 
 export default function App() {
@@ -65,12 +66,12 @@ export default function App() {
                 <Route index element={ <RequireAuth><StarshipsPage /></RequireAuth>} />
                 <Route path=":id" element={ <RequireAuth><StarshipDetailsPage /></RequireAuth>} />
             </Route>
-
         </Route>
         <Route element={<LayoutAuth />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/logout" element={<LogoutPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>
   );

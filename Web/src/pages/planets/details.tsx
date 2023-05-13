@@ -41,7 +41,7 @@ function PlanetsDetailPage() {
                             <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{planet.name}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={planet.name} style={{height: 300, display: 'block', margin: 'auto'}} />
+                            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={planet.name} style={{height: 300, display: 'block', margin: 'auto'}} onError={(e) => {e.currentTarget.src = '/404.png'}} />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="h6" fontWeight={"bold"}>Informations</Typography>

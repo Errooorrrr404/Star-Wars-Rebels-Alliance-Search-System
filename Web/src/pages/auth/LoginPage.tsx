@@ -1,6 +1,6 @@
 import React from 'react'
 import { LockOutlined } from '@mui/icons-material'
-import { Grid, Paper, Avatar, TextField, FormControlLabel, Checkbox, Button, Typography, FormControl, FormHelperText, Input, InputLabel } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, FormControlLabel, Checkbox, Button, Typography, FormControl, FormHelperText, Input, InputLabel, Box } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -33,12 +33,18 @@ const LoginPage = () => {
         }, 1000);
 
     }
-    const paperStyle={width:'90%', maxWidth: 700, padding:16, margin: 'auto'}
+    const paperStyle={width:'100%', maxWidth: 700, padding:16, margin: 'auto'}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'8px 0'}
     const inputStyle={margin:'8px 0'}
 
     return(
+        <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+    >
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid>
@@ -52,6 +58,7 @@ const LoginPage = () => {
                 </form>
             </Paper>
         </Grid>
+        </Box>
     )
 }
 
