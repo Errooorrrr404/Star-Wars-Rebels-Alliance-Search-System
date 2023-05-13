@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Typography, TextField, CircularProgress } from '@mui/material';
 import { apiAuth } from '../../tools/instance';
-import DisplayResponse from './Components/Response';
+import DisplayResponse from './Response/Response';
+import { ResultsFilmsEntity } from '../../interfaces/Films';
+import { ResultsPeopleEntity } from '../../interfaces/People';
+import { ResultPlanetsEntity } from '../../interfaces/Planets';
+import { ResultsSpeciesEntity } from '../../interfaces/Species';
+import { ResultsStarshipsEntity } from '../../interfaces/Starships';
+import { ResultsVehiclesEntity } from '../../interfaces/Vehicles';
 
-interface SearchResult {
-  id: number;
-  title: string;
+
+export interface SearchResult {
+  count: number;
+  next?: null;
+  previous?: null;
+  results?: Array<ResultsPeopleEntity> | Array<ResultsFilmsEntity> | Array<ResultsSpeciesEntity> | Array<ResultsStarshipsEntity> | Array<ResultsVehiclesEntity> | Array<ResultPlanetsEntity>;
 }
 
 interface Props {
@@ -16,7 +24,7 @@ interface Props {
 
 const SearchPage = (props: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<any>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const debounce = <F extends (...args: any[]) => void>(func: F, delay: number) => {
@@ -34,7 +42,7 @@ const SearchPage = (props: Props) => {
   const handleSearch = debounce(async (value: string) => {
     const searchItem = value.trim();
     if (searchItem.length === 0) {
-        setSearchResults([]);
+        setSearchResults(null);
         return;
     }
     try {
@@ -43,7 +51,7 @@ const SearchPage = (props: Props) => {
       setSearchResults(response.data);
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la recherche.', error);
-      setSearchResults([]);
+      setSearchResults(null);
     } finally {
       setLoading(false);
     }

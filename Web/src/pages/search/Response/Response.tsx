@@ -1,17 +1,19 @@
-import DisplayAnswerFilms from "./Films";
-import DisplayAnswerPeople from "./People";
-import DisplayAnswerPlanets from "./Planets";
-import DisplayAnswerSpecies from "./Species";
-import DisplayAnswerStarships from "./Starships";
-import DisplayAnswerVehicles from "./Vehicles";
+import { SearchResult } from "../SearchPage";
+import DisplayAnswerFilms from "./Card/Films";
+import DisplayAnswerPeople from "./Card/People";
+import DisplayAnswerPlanets from "./Card/Planets";
+import DisplayAnswerSpecies from "./Card/Species";
+import DisplayAnswerStarships from "./Card/Starships";
+import DisplayAnswerVehicles from "./Card/Vehicles";
 
 interface Props {
     type: 'people' | 'films' | 'starships' | 'vehicles' | 'species' | 'planets';
-    results: any;
+    results: SearchResult | null;
 }
 
 const DisplayResponse = (props: Props) => {
   const { results } = props;
+  console.log(props.type)
   switch (props.type) {
     case 'people':
         return <DisplayAnswerPeople results={results} />;
