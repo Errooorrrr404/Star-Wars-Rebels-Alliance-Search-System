@@ -5,24 +5,23 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../providers/AuthProvider'
 
 const LogoutPage = () => {
-    let navigate = useNavigate();
-    let auth = useAuth();
+  const navigate = useNavigate()
+  const auth = useAuth()
 
-    React.useEffect(() => {
-        setTimeout(() => {
-            auth.signOut();
-            navigate("/", { replace: true });
-        }, 1500);
+  React.useEffect(() => {
+    setTimeout(() => {
+      auth.signOut()
+      navigate('/', { replace: true })
+    }, 1500)
+  }, [auth, navigate])
 
-    }, [auth, navigate]);
-
-    return(
+  return (
         <Grid>
-            <Paper elevation={10} style={{padding:16, margin: 'auto', width: 'fit-content', transform: 'translate(50%, 50%)'}}>
+            <Paper elevation={10} style={{ padding: 16, margin: 'auto', width: 'fit-content', transform: 'translate(50%, 50%)' }}>
                 <CircularProgress />
             </Paper>
         </Grid>
-    )
+  )
 }
 
-export default LogoutPage;
+export default LogoutPage

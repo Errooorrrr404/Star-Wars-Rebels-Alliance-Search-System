@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const NotFoundPage: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Box
       display="flex"
@@ -23,7 +23,7 @@ const NotFoundPage: React.FC = () => {
         <Typography variant="body1">
           La page que vous cherchez n'existe pas dans cette galaxie.
         </Typography>
-        <Button variant="contained" color="primary" onClick={() => navigate('/', {replace: true})} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
+        <Button variant="contained" color="primary" onClick={() => { navigate('/', { replace: true }) }} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
             Retour à l'accueil
         </Button>
         <img
@@ -33,7 +33,7 @@ const NotFoundPage: React.FC = () => {
         />
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

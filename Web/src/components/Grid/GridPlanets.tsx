@@ -1,19 +1,19 @@
-import { Grid, Typography } from "@mui/material";
-import { Key } from "react";
-import CardPlanet from "../Cards/CardPlanet";
+import { Grid, Typography } from '@mui/material'
+import { type Key } from 'react'
+import CardPlanet from '../Cards/CardPlanet'
 
 interface Props {
-    planets: (string)[] | null;
+  planets: (string)[] | null
 }
 
-function GridPlanets(props: Props) {
-    const { planets } = props;
-    if (!planets) {
-        return null
-    }
-    return (
+function GridPlanets (props: Props) {
+  const { planets } = props
+  if (planets == null) {
+    return null
+  }
+  return (
         <Grid item xs={12} sm={12} md={6}>
-            <Typography variant="h6" fontWeight={"bold"} textAlign={'center'}>Planètes</Typography>
+            <Typography variant="h6" fontWeight={'bold'} textAlign={'center'}>Planètes</Typography>
             <Grid container spacing={2} rowSpacing={2}>
                 {planets?.map((planet: string, index: Key) => (
                     <Grid item xs={12} sm={6} key={index}>
@@ -22,7 +22,7 @@ function GridPlanets(props: Props) {
                 ))}
             </Grid>
         </Grid>
-    );
+  )
 }
 
-export default GridPlanets;
+export default GridPlanets

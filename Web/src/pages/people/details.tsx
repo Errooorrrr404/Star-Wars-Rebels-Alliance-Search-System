@@ -1,50 +1,56 @@
-import { useParams } from "react-router-dom";
-import { ResultsPeopleEntity } from "../../interfaces/People";
-import { useEffect, useState } from "react";
-import { apiAuth } from "../../tools/instance";
-import { Card, CardContent, CircularProgress, Grid, Toolbar, Typography } from "@mui/material";
-import GridFilm from "../../components/Grid/GridFilms";
-import GridSpecies from "../../components/Grid/GridSpecies";
-import GridStarShip from "../../components/Grid/GridStarShip";
-import GridVehicles from "../../components/Grid/GridVehicles";
-import { toast } from "react-toastify";
-import { StyledImage } from "../../css/stylesDetailsPage";
+import { useParams } from 'react-router-dom'
+import { type ResultsPeopleEntity } from '../../interfaces/People'
+import { useEffect, useState } from 'react'
+import { apiAuth } from '../../tools/instance'
+import { Card, CardContent, CircularProgress, Grid, Toolbar, Typography } from '@mui/material'
+import GridFilm from '../../components/Grid/GridFilms'
+import GridSpecies from '../../components/Grid/GridSpecies'
+import GridStarShip from '../../components/Grid/GridStarShip'
+import GridVehicles from '../../components/Grid/GridVehicles'
+import { toast } from 'react-toastify'
+import { StyledImage } from '../../css/stylesDetailsPage'
+import { useRecoilState } from 'recoil'
+import { responseTypeState } from '../search/SearchPage'
 
-function PeopleDetailPage() {
-    const { id } = useParams()
-    const [people, setPeople] = useState<ResultsPeopleEntity | null>(null)
+function PeopleDetailPage () {
+  const { id } = useParams()
+  const [people, setPeople] = useState<ResultsPeopleEntity | null>(null)
+  const [format, setFormat] = useRecoilState(responseTypeState)
 
-
-    useEffect(() => {
-        async function getPeople() {
-            try {
-            const response = await apiAuth.get(`/people/${id}`)
-            console.log(response.data)
-            setPeople(response.data)
-            } catch (error) {
-                toast.error('Une erreur s\'est produite lors de la recherche.');
-            }
+  useEffect(() => {
+    async function getPeople () {
+      try {
+        const response = await apiAuth.get(`/people/${id}`)
+        if (typeof response.data === 'string') {
+          toast.warning('Impossible de récupérer les données en ' + format + '.')
+          setFormat('json')
+          return
         }
-        getPeople()
-    }, [id])
-
-    if (!people) {
-        return <>
-            <Toolbar />
-            <CircularProgress style={{display: 'block', margin: 'auto'}}/>
-        </>
+        setPeople(response.data)
+      } catch (error) {
+        toast.error('Une erreur s\'est produite lors de la recherche.')
+      }
     }
-    return (
+    getPeople()
+  }, [id, format, setFormat])
+
+  if (people == null) {
+    return <>
+            <Toolbar />
+            <CircularProgress style={{ display: 'block', margin: 'auto' }}/>
+        </>
+  }
+  return (
         <div>
             <Toolbar />
             <Card>
                 <CardContent>
                     <Grid container spacing={2} rowSpacing={2}>
                         <Grid item xs={12}>
-                            <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{people.name}</Typography>
+                            <Typography variant="h4" fontWeight={'bold'} textAlign={'center'}>{people.name}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={people.name} onError={(e: any) => {e.currentTarget.src = '/404.png'}}/>
+                            <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={people.name} onError={(e: any) => { e.currentTarget.src = '/404.png' }}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <p>Date d&apos;anniversaire: {people.birth_year}</p>
@@ -57,23 +63,31 @@ function PeopleDetailPage() {
                     </Grid>
                     <br />
                     <Grid container spacing={2} rowSpacing={2}>
-                        {people.films?.length && people.films?.length > 0 ? (
+                        {people.films?.length && people.films?.length > 0
+                          ? (
                             <GridFilm films={people.films} />
-                        ) : null}
-                        {people.starships?.length && people.starships?.length > 0 ? (
+                            )
+                          : null}
+                        {people.starships?.length && people.starships?.length > 0
+                          ? (
                             <GridStarShip starships={people.starships} />
-                        ) : null}
-                        {people.species?.length && people.species?.length > 0 ? (
+                            )
+                          : null}
+                        {people.species?.length && people.species?.length > 0
+                          ? (
                             <GridSpecies species={people.species} />
-                        ) : null}
-                        {people.vehicles?.length && people.vehicles?.length > 0 ? (
+                            )
+                          : null}
+                        {people.vehicles?.length && people.vehicles?.length > 0
+                          ? (
                             <GridVehicles vehicles={people.vehicles} />
-                        ) : null}
+                            )
+                          : null}
                     </Grid>
                 </CardContent>
             </Card>
         </div>
-    )
+  )
 }
 
-export default PeopleDetailPage;
+export default PeopleDetailPage

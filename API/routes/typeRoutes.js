@@ -47,7 +47,7 @@ async function typeRoutes() {
                 const url = `${process.env.BASE_URL}/${type}/${id}?format=${format}&page=${page}`;
                 const response = await axios.get(url);
 
-                return h.response(formateResponse(response.data)).code(status.OK);
+                return h.response(formateResponse(response.data, format)).code(status.OK);
                 } catch (err) {
                     return h.response({ message: err.response.data.detail || err.message }).code(err.response.status || status.BAD_REQUEST);
                 }

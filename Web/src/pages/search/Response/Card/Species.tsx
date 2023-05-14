@@ -1,65 +1,63 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { SearchResult, pageState } from "../../SearchPage";
-import { Key } from "react";
-import { useNavigate } from "react-router-dom";
-import { baseURL } from "../../../../tools/instance";
-import { useRecoilState } from "recoil";
-import { StyledAvatar, StyledButton, StyledCard, StyledImage } from "./styles";
+import { Button, Grid, Typography } from '@mui/material'
+import { type SearchResult, pageState } from '../../SearchPage'
+import { type Key } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { baseURL } from '../../../../tools/instance'
+import { useRecoilState } from 'recoil'
+import { StyledAvatar, StyledButton, StyledCard, StyledImage } from './styles'
 
 interface Props {
-    results: SearchResult | null;
+  results: SearchResult | null
 }
 
 const DisplayAnswerSpecies = (props: Props) => {
-    const [, setPage] = useRecoilState(pageState);
+  const [, setPage] = useRecoilState(pageState)
 
-    const navigate = useNavigate();
-    if (!props.results) {
-        return null;
+  const navigate = useNavigate()
+  if (props.results == null) {
+    return null
+  }
+
+  const updatePage = (mode: string) => {
+    let url = ''
+
+    if (props.results === null) {
+      return
     }
 
-    const updatePage = (mode: string) => {
-        let url = '';
-
-        if (props.results === null) {
-            return;
-        }
-
-        if (mode === 'prev' && props.results.previous !== null) {
-            url = props.results.previous;
-        } else if (mode === 'next' && props.results.next !== null) {
-            url = props.results.next;
-        } else {
-            return;
-        }
-        const newPage = new URL(url).searchParams.get('page');
-
-        if (newPage !== null) {
-            setPage(newPage);
-        }
-
-
+    if (mode === 'prev' && props.results.previous !== null) {
+      url = props.results.previous
+    } else if (mode === 'next' && props.results.next !== null) {
+      url = props.results.next
+    } else {
+      return
     }
-    return (
+    const newPage = new URL(url).searchParams.get('page')
+
+    if (newPage !== null) {
+      setPage(newPage)
+    }
+  }
+  return (
        <Grid container spacing={2} rowSpacing={2}>
         <Grid item xs={4}>
-            {props.results.previous !== null ?
-                <Button variant="contained" color="primary" onClick={() => updatePage('prev')}>
+            {props.results.previous !== null
+              ? <Button variant="contained" color="primary" onClick={() => { updatePage('prev') }}>
                     Résultats Précédents
                 </Button>
-             : null}
+              : null}
             </Grid>
         <Grid item xs={4}>
         </Grid>
         <Grid item xs={4}>
             {props.results.next !== null &&
-                <Button variant="contained" color="primary" onClick={() => updatePage('next')}>
+                <Button variant="contained" color="primary" onClick={() => { updatePage('next') }}>
                 Résultats Suivants
                 </Button>
             }
         </Grid>
               {
-                props.results.results && props.results.results.map((result: any, index: Key) => (
+                (props.results.results != null) && props.results.results.map((result: any, index: Key) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                         <StyledCard>
                             <Grid container spacing={2} rowSpacing={2}>
@@ -82,7 +80,7 @@ const DisplayAnswerSpecies = (props: Props) => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <StyledButton variant="contained" color="primary" onClick={() => {navigate(result.url.replace(baseURL, ''), {replace: true})}}>
+                                    <StyledButton variant="contained" color="primary" onClick={() => { navigate(result.url.replace(baseURL, ''), { replace: true }) }}>
                                         Voir plus
                                     </StyledButton>
                                 </Grid>
@@ -92,7 +90,7 @@ const DisplayAnswerSpecies = (props: Props) => {
                 ))
                 }
        </Grid>
-    );
-};
+  )
+}
 
-export default DisplayAnswerSpecies;
+export default DisplayAnswerSpecies

@@ -1,30 +1,29 @@
 import {
   Routes,
-  Route,
-} from "react-router-dom";
-import { AuthProvider, RequireAuth } from "./providers/AuthProvider";
-import LogoutPage from "./pages/auth/LogoutPage";
-import LoginPage from "./pages/auth/LoginPage";
-import Layout from "./tools/Layout";
-import HomePage from "./pages/home/HomePage";
-import LayoutAuth from "./tools/LayoutAuth";
-import PeoplePage from "./pages/people";
-import SpeciesPage from "./pages/species";
-import VehiclesPage from "./pages/vehicles";
-import PeopleDetailPage from "./pages/people/details";
-import VehiclesDetailPage from "./pages/vehicles/details";
-import PlanetsDetailPage from "./pages/planets/details";
-import FilmsDetailPage from "./pages/films/details";
-import SpeciesDetailsPage from "./pages/species/details";
-import StarshipDetailsPage from "./pages/starships/details";
-import FilmPage from "./pages/films";
-import PlanetsPage from "./pages/planets";
-import StarshipsPage from "./pages/starships";
-import NotFoundPage from "./pages/errors/NotFound";
-import Locked from "./pages/errors/Locked";
+  Route
+} from 'react-router-dom'
+import { AuthProvider, RequireAuth } from './providers/AuthProvider'
+import LogoutPage from './pages/auth/LogoutPage'
+import LoginPage from './pages/auth/LoginPage'
+import Layout from './tools/Layout'
+import HomePage from './pages/home/HomePage'
+import LayoutAuth from './tools/LayoutAuth'
+import PeoplePage from './pages/people'
+import SpeciesPage from './pages/species'
+import VehiclesPage from './pages/vehicles'
+import PeopleDetailPage from './pages/people/details'
+import VehiclesDetailPage from './pages/vehicles/details'
+import PlanetsDetailPage from './pages/planets/details'
+import FilmsDetailPage from './pages/films/details'
+import SpeciesDetailsPage from './pages/species/details'
+import StarshipDetailsPage from './pages/starships/details'
+import FilmPage from './pages/films'
+import PlanetsPage from './pages/planets'
+import StarshipsPage from './pages/starships'
+import NotFoundPage from './pages/errors/NotFound'
+import Locked from './pages/errors/Locked'
 
-
-export default function App() {
+export default function App () {
   return (
     <AuthProvider>
       <Routes>
@@ -77,7 +76,5 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>
-  );
+  )
 }
-
-

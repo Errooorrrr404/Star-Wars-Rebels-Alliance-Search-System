@@ -1,48 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { apiAuthEmpty, baseURL } from "../../tools/instance";
-import dayjs from "dayjs";
-import { CardContent, Typography } from "@mui/material";
-import { ResultsVehiclesEntity } from "../../interfaces/Vehicles";
-import Loader from "../Loader/Loader";
-import { StyledCard, StyledImage, StyledButton } from "./styles";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react'
+import { apiAuthEmpty, baseURL } from '../../tools/instance'
+import dayjs from 'dayjs'
+import { CardContent, Typography } from '@mui/material'
+import { type ResultsVehiclesEntity } from '../../interfaces/Vehicles'
+import Loader from '../Loader/Loader'
+import { StyledCard, StyledImage, StyledButton } from './styles'
+import { toast } from 'react-toastify'
 
 const localizedFormat = require('dayjs/plugin/localizedFormat')
 require('dayjs/locale/fr')
 dayjs.extend(localizedFormat)
 
 interface Props {
-  query: string;
+  query: string
 }
 
-
 const CardVehicles: React.FC<Props> = (props: Props) => {
-  const { query } = props;
-  const [results, setResults] = useState<ResultsVehiclesEntity | null>(null);
+  const { query } = props
+  const [results, setResults] = useState<ResultsVehiclesEntity | null>(null)
 
   useEffect(() => {
-    async function getFilm() {
+    async function getFilm () {
       try {
-        const response = await apiAuthEmpty.get(`${query}`);
-        setResults(response.data);
+        const response = await apiAuthEmpty.get(`${query}`)
+        setResults(response.data)
       } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.');
-        setResults(null);
+        toast.error('Une erreur s\'est produite lors de la recherche.')
+        setResults(null)
       }
     }
-    getFilm();
-  }, [query]);
+    getFilm()
+  }, [query])
 
-  if (!results) {
-    return <Loader />;
+  if (results == null) {
+    return <Loader />
   }
   return (
     <div>
       {results && (
         <StyledCard>
           <CardContent>
-            <StyledImage src={`https://starwars-visualguide.com/assets/img/vehicles/${results.url.replace(baseURL + '/vehicles', '').replace('/', '')}.jpg`} alt={results.name}  onError={(e: any) => {e.currentTarget.src = '/404.png'}}/>
-            <Typography variant="h6" fontWeight={"bold"}>{results.name}</Typography>
+            <StyledImage src={`https://starwars-visualguide.com/assets/img/vehicles/${results.url.replace(baseURL + '/vehicles', '').replace('/', '')}.jpg`} alt={results.name} onError={(e: any) => { e.currentTarget.src = '/404.png' }}/>
+            <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
             <Typography>Modèle: {results.model}</Typography>
             <Typography>Fabricant: {results.manufacturer}</Typography>
             <Typography>Coût: {results.cost_in_credits} crédits</Typography>
@@ -54,7 +53,7 @@ const CardVehicles: React.FC<Props> = (props: Props) => {
         </StyledCard>
       )}
     </div>
-  );
+  )
 }
 
-export default CardVehicles;
+export default CardVehicles

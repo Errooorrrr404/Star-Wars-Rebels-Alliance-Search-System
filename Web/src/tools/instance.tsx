@@ -1,19 +1,19 @@
-import axios from "axios";
-export const baseURL = 'http://localhost:8000';
+import axios from 'axios'
+export const baseURL = 'http://localhost:8000'
 
 export const apiAuth = axios.create({
-    baseURL: baseURL,
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-    }
-});
+  baseURL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  }
+})
 
 export const apiAuthEmpty = axios.create({
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-    }
-});
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  }
+})
 
 export const apiPublic = axios.create({
-    baseURL: baseURL
-});
+  baseURL
+})

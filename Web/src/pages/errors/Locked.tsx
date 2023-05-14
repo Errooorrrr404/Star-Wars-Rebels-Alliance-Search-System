@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const Locked: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Box
       display="flex"
@@ -21,7 +21,7 @@ const Locked: React.FC = () => {
           Accès refusé aux membres de l'Empire
         </Typography>
 
-        <Button variant="contained" color="primary" onClick={() => navigate('/', {replace: true})} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
+        <Button variant="contained" color="primary" onClick={() => { navigate('/', { replace: true }) }} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
             Retour à l'accueil
         </Button>
         <img
@@ -31,7 +31,7 @@ const Locked: React.FC = () => {
         />
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Locked;
+export default Locked

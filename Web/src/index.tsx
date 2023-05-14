@@ -1,22 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
-import "./css/index.css";
-import 'react-toastify/dist/ReactToastify.css';
-import App from "./App";
-import { ToastContainer } from "react-toastify";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { RecoilRoot } from "recoil";
+import './css/index.css'
+import 'react-toastify/dist/ReactToastify.css'
+import App from './App'
+import { ToastContainer } from 'react-toastify'
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
+import { RecoilRoot } from 'recoil'
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
-  },
-});
+    mode: 'dark'
+  }
+})
 
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
@@ -40,4 +39,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
     </BrowserRouter>
   </React.StrictMode>
-);
+)
