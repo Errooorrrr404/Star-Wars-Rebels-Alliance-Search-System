@@ -1,11 +1,11 @@
 import SearchPage from '../search/SearchPage'
 
-function PeoplePage () {
+function PeoplePage() {
   return (
-        <div>
-            <h1>Base de données des Personnes de la Galaxie</h1>
-            <SearchPage type="people" />
-        </div>
+    <div>
+      <h1>Base de données des Personnes de la Galaxie</h1>
+      <SearchPage type="people" />
+    </div>
   )
 }
 

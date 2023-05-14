@@ -49,7 +49,7 @@ const SearchPage = (props: Props) => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    async function getData (searchTerm: string) {
+    async function getData(searchTerm: string) {
       try {
         setLoading(true)
         const response = await apiAuth().get(`/${props.type}/search?q=${searchTerm}&page=${page}&format=${responseType}`)
@@ -107,11 +107,11 @@ const SearchPage = (props: Props) => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Format</InputLabel>
                 <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={responseType}
-                label="Format"
-                onChange={(event: SelectChangeEvent) => { setResponseType(event.target.value) }}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={responseType}
+                  label="Format"
+                  onChange={(event: SelectChangeEvent) => { setResponseType(event.target.value) }}
                 >
                   <MenuItem value={'json'}>json</MenuItem>
                   <MenuItem value={'wookiee'}>wookiee</MenuItem>
@@ -120,11 +120,11 @@ const SearchPage = (props: Props) => {
             </Grid>
             <Grid item xs={12} sm={12} md={9} lg={10} xl={11}>
               <TextField
-              label="Rechercher"
-              variant="outlined"
-              value={searchTerm}
-              onChange={handleSearch}
-              fullWidth
+                label="Rechercher"
+                variant="outlined"
+                value={searchTerm}
+                onChange={handleSearch}
+                fullWidth
               />
             </Grid>
           </Grid>
@@ -140,12 +140,12 @@ const SearchPage = (props: Props) => {
       <div style={{ marginTop: 16 }}>
         {loading
           ? (
-          <Loader />
-            )
+            <Loader />
+          )
           : (
-          <DisplayResponse results={searchResults} type={props.type} />
-            )}
-        </div>
+            <DisplayResponse results={searchResults} type={props.type} />
+          )}
+      </div>
     </div>
   )
 }

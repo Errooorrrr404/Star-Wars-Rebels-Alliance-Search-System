@@ -23,20 +23,19 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <CssBaseline />
           <App />
           <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-           />
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </RecoilRoot>
       </ThemeProvider>
-
     </BrowserRouter>
   </React.StrictMode>
 )

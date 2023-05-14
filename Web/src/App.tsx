@@ -23,7 +23,7 @@ import StarshipsPage from './pages/starships'
 import NotFoundPage from './pages/errors/NotFound'
 import Locked from './pages/errors/Locked'
 
-export default function App () {
+export default function App() {
   return (
     <AuthProvider>
       <Routes>
@@ -36,36 +36,36 @@ export default function App () {
               </RequireAuth>
             }
           />
-            <Route
-              path="/people">
-                <Route index element={ <RequireAuth><PeoplePage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><PeopleDetailPage /></RequireAuth>} />
-            </Route>
-            <Route
-              path="/vehicles">
-                <Route index element={ <RequireAuth><VehiclesPage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><VehiclesDetailPage /></RequireAuth>} />
-            </Route>
-            <Route
-              path="/planets">
-                <Route index element={ <RequireAuth><PlanetsPage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><PlanetsDetailPage /></RequireAuth>} />
-            </Route>
-            <Route
-              path="/films">
-                <Route index element={ <RequireAuth><FilmPage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><FilmsDetailPage /></RequireAuth>} />
-            </Route>
-            <Route
-              path="/species">
-                <Route index element={ <RequireAuth><SpeciesPage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><SpeciesDetailsPage /></RequireAuth>} />
-            </Route>
-            <Route
-              path="/starships">
-                <Route index element={ <RequireAuth><StarshipsPage /></RequireAuth>} />
-                <Route path=":id" element={ <RequireAuth><StarshipDetailsPage /></RequireAuth>} />
-            </Route>
+          <Route
+            path="/people">
+            <Route index element={<RequireAuth><PeoplePage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><PeopleDetailPage /></RequireAuth>} />
+          </Route>
+          <Route
+            path="/vehicles">
+            <Route index element={<RequireAuth><VehiclesPage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><VehiclesDetailPage /></RequireAuth>} />
+          </Route>
+          <Route
+            path="/planets">
+            <Route index element={<RequireAuth><PlanetsPage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><PlanetsDetailPage /></RequireAuth>} />
+          </Route>
+          <Route
+            path="/films">
+            <Route index element={<RequireAuth><FilmPage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><FilmsDetailPage /></RequireAuth>} />
+          </Route>
+          <Route
+            path="/species">
+            <Route index element={<RequireAuth><SpeciesPage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><SpeciesDetailsPage /></RequireAuth>} />
+          </Route>
+          <Route
+            path="/starships">
+            <Route index element={<RequireAuth><StarshipsPage /></RequireAuth>} />
+            <Route path=":id" element={<RequireAuth><StarshipDetailsPage /></RequireAuth>} />
+          </Route>
         </Route>
         <Route element={<LayoutAuth />}>
           <Route path="/login" element={<LoginPage />} />

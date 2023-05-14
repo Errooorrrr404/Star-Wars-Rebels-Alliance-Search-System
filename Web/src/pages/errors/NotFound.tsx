@@ -24,7 +24,7 @@ const NotFoundPage: React.FC = () => {
           La page que vous cherchez n'existe pas dans cette galaxie.
         </Typography>
         <Button variant="contained" color="primary" onClick={() => { navigate('/', { replace: true }) }} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
-            Retour à l'accueil
+          Retour à l'accueil
         </Button>
         <img
           src="https://milnersblog.files.wordpress.com/2014/11/star-wars-at-at-walkers-gif-by-dkng.gif?w=474"

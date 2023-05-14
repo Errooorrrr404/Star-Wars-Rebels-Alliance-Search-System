@@ -6,22 +6,22 @@ interface Props {
   people: (string)[] | null
 }
 
-function GridPeople (props: Props) {
+function GridPeople(props: Props) {
   const { people } = props
   if (people == null) {
     return null
   }
   return (
-        <Grid item xs={12} sm={12} md={6}>
-            <Typography variant="h6" fontWeight={'bold'} textAlign={'center'}>Personnages</Typography>
-            <Grid container spacing={2} rowSpacing={2}>
-                {people?.map((character: string, index: Key) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                        <CardPeople query={character} />
-                    </Grid>
-                ))}
-            </Grid>
-        </Grid>
+    <Grid item xs={12} sm={12} md={6}>
+      <Typography variant="h6" fontWeight={'bold'} textAlign={'center'}>Personnages</Typography>
+      <Grid container spacing={2} rowSpacing={2}>
+        {people?.map((character: string, index: Key) => (
+          <Grid item xs={12} sm={6} key={index}>
+            <CardPeople query={character} />
+          </Grid>
+        ))}
+      </Grid>
+    </Grid>
   )
 }
 

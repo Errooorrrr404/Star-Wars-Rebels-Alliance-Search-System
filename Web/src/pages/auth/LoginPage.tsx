@@ -23,7 +23,7 @@ const LoginPage = () => {
 
   const from = location.state?.from?.pathname || '/'
 
-  async function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setLoading(true)
     const response = await handleSignIn()
@@ -41,7 +41,7 @@ const LoginPage = () => {
           setTimeout(() => {
             navigate('/locked', { replace: true })
           }
-          , 5000)
+            , 5000)
         } else {
           toast.error("Mauvais identifiants. Serais-tu un espion de l'Empire ?")
         }
@@ -61,29 +61,29 @@ const LoginPage = () => {
       height="90vh">
       <Box textAlign="center">
         {
-            success
-              ? (
-                <>
+          success
+            ? (
+              <>
                 <Typography variant="h4" component="h2" gutterBottom>
-                    Tu es maintenant connecté. Redirection en cours...
+                  Tu es maintenant connecté. Redirection en cours...
                 </Typography>
-                <img src="https://static.wixstatic.com/media/209473_b076ac597b3445bfac8829c4034899e4~mv2.gif" alt="Star Wars GIF" style={{ maxWidth: '100%', marginTop: '20px', borderRadius: '6px', objectFit: 'cover' }}/>
-                 </>
-                )
-              : (
-                <Grid>
-                        <Paper elevation={10} style={paperStyle}>
-                            <Grid>
-                                <h2>Connecte-toi Rebelle !</h2>
-                            </Grid>
-                            <form onSubmit={handleSubmit}>
-                                <TextField label='Login' placeholder='Obi Wan' variant="outlined" fullWidth required style={inputStyle} onChange={(e) => { setLogin(e.target.value) }}/>
-                                <TextField label='Mot de passe' placeholder='Meilleur-Jedi-De-La-Galaxie' type='password' variant="outlined" fullWidth required style={inputStyle} onChange={(e) => { setPassword(e.target.value) }}/>
-                                <LoadingButton type='submit' color='primary' variant="contained" style={btnstyle} fullWidth loading={loading} disabled={nbInvalid > 3}>Rejoindre la Rébellion</LoadingButton>
-                            </form>
-                        </Paper>
-                </Grid>
-                )
+                <img src="https://static.wixstatic.com/media/209473_b076ac597b3445bfac8829c4034899e4~mv2.gif" alt="Star Wars GIF" style={{ maxWidth: '100%', marginTop: '20px', borderRadius: '6px', objectFit: 'cover' }} />
+              </>
+            )
+            : (
+              <Grid>
+                <Paper elevation={10} style={paperStyle}>
+                  <Grid>
+                    <h2>Connecte-toi Rebelle !</h2>
+                  </Grid>
+                  <form onSubmit={handleSubmit}>
+                    <TextField label='Login' placeholder='Obi Wan' variant="outlined" fullWidth required style={inputStyle} onChange={(e) => { setLogin(e.target.value) }} />
+                    <TextField label='Mot de passe' placeholder='Meilleur-Jedi-De-La-Galaxie' type='password' variant="outlined" fullWidth required style={inputStyle} onChange={(e) => { setPassword(e.target.value) }} />
+                    <LoadingButton type='submit' color='primary' variant="contained" style={btnstyle} fullWidth loading={loading} disabled={nbInvalid > 3}>Rejoindre la Rébellion</LoadingButton>
+                  </form>
+                </Paper>
+              </Grid>
+            )
         }
       </Box>
     </Box>

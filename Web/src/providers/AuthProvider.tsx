@@ -11,7 +11,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   token: null,
   signIn: async () => await Promise.resolve(false),
-  signOut: () => {}
+  signOut: () => { }
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>
 }
 
-export function RequireAuth ({ children }: { children: JSX.Element }) {
+export function RequireAuth({ children }: { children: JSX.Element }) {
   const { token } = useAuth()
   const location = useLocation()
 

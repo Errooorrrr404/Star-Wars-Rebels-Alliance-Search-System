@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import { Button, Card } from '@mui/material'
 
 export const StyledCard = styled(Card)`
-  // Add your custom styles here
 `
 
 export const StyledImage = styled('img')`

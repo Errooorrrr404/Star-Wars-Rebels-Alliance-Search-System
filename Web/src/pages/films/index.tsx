@@ -1,11 +1,11 @@
 import SearchPage from '../search/SearchPage'
 
-function FilmPage () {
+function FilmPage() {
   return (
-        <div>
-            <h1>Base de données des Films de la Saga</h1>
-            <SearchPage type="films" />
-        </div>
+    <div>
+      <h1>Base de données des Films de la Saga</h1>
+      <SearchPage type="films" />
+    </div>
   )
 }
 

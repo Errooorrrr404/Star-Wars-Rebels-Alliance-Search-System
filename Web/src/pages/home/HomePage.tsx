@@ -39,36 +39,36 @@ const categories = [
   }
 ]
 
-function HomePage (props: Props) {
+function HomePage(props: Props) {
   const navigate = useNavigate()
   return (
     <>
-        <CssBaseline />
-        <h1>Bienvenue sur Star Wars Search</h1>
-        <h2>Que souhaitez-vous faire ?</h2>
-        <Grid container spacing={2} rowSpacing={2}>
-            {categories.map((category, index) => (<Grid item xs={4}>
-                <Card key={index}>
-                  <CardContent>
-                    <Typography variant="h5" component="div" textAlign={'center'}>
-                      {category.title}
-                    </Typography>
-                    <CardMedia
-                      component="img"
-                      height={250}
-                      image={category.image}
-                      alt="Véhicule"
-                      style={{ borderRadius: 6, objectFit: 'cover' }}
-                    />
-                  </CardContent>
-                  <CardActions>
-                    <Button type="button" variant="contained" onClick={() => { navigate(category.link, { replace: true }) }} size="small"
-                    style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}>Accéder à la base</Button>
-                  </CardActions>
-                </Card>
-            </Grid>
-            ))}
-          </Grid>
+      <CssBaseline />
+      <h1>Bienvenue sur Star Wars Search</h1>
+      <h2>Que souhaitez-vous faire ?</h2>
+      <Grid container spacing={2} rowSpacing={2}>
+        {categories.map((category, index) => (<Grid item xs={4}>
+          <Card key={index}>
+            <CardContent>
+              <Typography variant="h5" component="div" textAlign={'center'}>
+                {category.title}
+              </Typography>
+              <CardMedia
+                component="img"
+                height={250}
+                image={category.image}
+                alt="Véhicule"
+                style={{ borderRadius: 6, objectFit: 'cover' }}
+              />
+            </CardContent>
+            <CardActions>
+              <Button type="button" variant="contained" onClick={() => { navigate(category.link, { replace: true }) }} size="small"
+                style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}>Accéder à la base</Button>
+            </CardActions>
+          </Card>
+        </Grid>
+        ))}
+      </Grid>
     </>
   )
 }

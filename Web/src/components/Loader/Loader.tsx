@@ -1,10 +1,10 @@
 import { Card, CircularProgress } from '@mui/material'
 
-function Loader () {
+function Loader() {
   return (
-        <Card style={{ padding: 16, width: 'fit-content', display: 'block', margin: 'auto' }}>
-            <CircularProgress/>
-        </Card>
+    <Card style={{ padding: 16, width: 'fit-content', display: 'block', margin: 'auto' }}>
+      <CircularProgress />
+    </Card>
   )
 }
 

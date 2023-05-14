@@ -20,7 +20,7 @@ const CardVehicles: React.FC<Props> = (props: Props) => {
   const [results, setResults] = useState<ResultsVehiclesEntity | null>(null)
 
   useEffect(() => {
-    async function getFilm () {
+    async function getFilm() {
       try {
         const response = await apiAuthEmpty.get(`${query}`)
         setResults(response.data)
@@ -40,7 +40,7 @@ const CardVehicles: React.FC<Props> = (props: Props) => {
       {results && (
         <StyledCard>
           <CardContent>
-            <StyledImage src={`https://starwars-visualguide.com/assets/img/vehicles/${results.url.replace(baseURL + '/vehicles', '').replace('/', '')}.jpg`} alt={results.name} onError={(e: any) => { e.currentTarget.src = '/404.png' }}/>
+            <StyledImage src={`https://starwars-visualguide.com/assets/img/vehicles/${results.url.replace(baseURL + '/vehicles', '').replace('/', '')}.jpg`} alt={results.name} onError={(e: any) => { e.currentTarget.src = '/404.png' }} />
             <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
             <Typography>Modèle: {results.model}</Typography>
             <Typography>Fabricant: {results.manufacturer}</Typography>

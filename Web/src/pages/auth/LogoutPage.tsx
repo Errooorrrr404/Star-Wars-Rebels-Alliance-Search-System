@@ -16,11 +16,11 @@ const LogoutPage = () => {
   }, [auth, navigate])
 
   return (
-        <Grid>
-            <Paper elevation={10} style={{ padding: 16, margin: 'auto', width: 'fit-content', transform: 'translate(50%, 50%)' }}>
-                <CircularProgress />
-            </Paper>
-        </Grid>
+    <Grid>
+      <Paper elevation={10} style={{ padding: 16, margin: 'auto', width: 'fit-content', transform: 'translate(50%, 50%)' }}>
+        <CircularProgress />
+      </Paper>
+    </Grid>
   )
 }
 

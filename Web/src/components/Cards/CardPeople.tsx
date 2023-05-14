@@ -15,12 +15,12 @@ interface Props {
   query: string
 }
 
-function CardPeople (props: Props) {
+function CardPeople(props: Props) {
   const { query } = props
   const [results, setResults] = useState<ResultsPeopleEntity | null>(null)
 
   useEffect(() => {
-    async function getPeople () {
+    async function getPeople() {
       try {
         const response = await apiAuthEmpty.get(`${query}`)
         setResults(response.data)
@@ -37,22 +37,22 @@ function CardPeople (props: Props) {
   }
 
   return (
-        <div>
-            {results && (
-                <StyledCard>
-                    <CardContent>
-                        <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${query.split('/')[4]}.jpg`} alt={results.name} style={{ width: '100%' }} onError={(e: any) => e.currentTarget.src = '/404.png'} />
-                        <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
-                        <Typography>Date d&apos;anniversaire: {results.birth_year}</Typography>
-                        <Typography>Taille: {results.height}</Typography>
-                        <Typography>Masse: {results.mass}</Typography>
-                        <StyledButton variant="contained" color="primary" href={`/people/${query.split('/')[4]}`}>
-                            En savoir plus
-                        </StyledButton>
-                    </CardContent>
-                </StyledCard>
-            )}
-        </div>
+    <div>
+      {results && (
+        <StyledCard>
+          <CardContent>
+            <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${query.split('/')[4]}.jpg`} alt={results.name} style={{ width: '100%' }} onError={(e: any) => e.currentTarget.src = '/404.png'} />
+            <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
+            <Typography>Date d&apos;anniversaire: {results.birth_year}</Typography>
+            <Typography>Taille: {results.height}</Typography>
+            <Typography>Masse: {results.mass}</Typography>
+            <StyledButton variant="contained" color="primary" href={`/people/${query.split('/')[4]}`}>
+              En savoir plus
+            </StyledButton>
+          </CardContent>
+        </StyledCard>
+      )}
+    </div>
   )
 }
 

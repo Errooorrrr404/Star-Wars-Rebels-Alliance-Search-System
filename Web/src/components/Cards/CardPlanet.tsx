@@ -15,12 +15,12 @@ interface Props {
   query: string
 }
 
-function CardPlanet (props: Props) {
+function CardPlanet(props: Props) {
   const { query } = props
   const [results, setResults] = useState<ResultPlanetsEntity | null>(null)
 
   useEffect(() => {
-    async function getPlanet () {
+    async function getPlanet() {
       try {
         const response = await apiAuthEmpty.get(`${query}`)
         setResults(response.data)
@@ -37,22 +37,22 @@ function CardPlanet (props: Props) {
   }
 
   return (
-        <div>
-            {results && (
-                <StyledCard>
-                    <CardContent>
-                        <StyledImage src={`https://starwars-visualguide.com/assets/img/planets/${query.split('/')[4]}.jpg`} alt={results.name} onError={(e: any) => e.currentTarget.src = '/404.png'} />
-                        <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
-                        <Typography>Population: {results.population}</Typography>
-                        <Typography>Climat: {results.climate}</Typography>
-                        <Typography>Diamètre: {results.diameter}</Typography>
-                        <StyledButton variant="contained" color="primary" href={`/planets/${query.split('/')[4]}`}>
-                            En savoir plus
-                        </StyledButton>
-                    </CardContent>
-                </StyledCard>
-            )}
-        </div>
+    <div>
+      {results && (
+        <StyledCard>
+          <CardContent>
+            <StyledImage src={`https://starwars-visualguide.com/assets/img/planets/${query.split('/')[4]}.jpg`} alt={results.name} onError={(e: any) => e.currentTarget.src = '/404.png'} />
+            <Typography variant="h6" fontWeight={'bold'}>{results.name}</Typography>
+            <Typography>Population: {results.population}</Typography>
+            <Typography>Climat: {results.climate}</Typography>
+            <Typography>Diamètre: {results.diameter}</Typography>
+            <StyledButton variant="contained" color="primary" href={`/planets/${query.split('/')[4]}`}>
+              En savoir plus
+            </StyledButton>
+          </CardContent>
+        </StyledCard>
+      )}
+    </div>
   )
 }
 

@@ -1,11 +1,11 @@
 import SearchPage from '../search/SearchPage'
 
-function StarshipsPage () {
+function StarshipsPage() {
   return (
-        <div>
-            <h1>Base de données des Vaisseaux de la Galaxie</h1>
-            <SearchPage type="starships" />
-        </div>
+    <div>
+      <h1>Base de données des Vaisseaux de la Galaxie</h1>
+      <SearchPage type="starships" />
+    </div>
   )
 }
 

@@ -22,7 +22,7 @@ const Locked: React.FC = () => {
         </Typography>
 
         <Button variant="contained" color="primary" onClick={() => { navigate('/', { replace: true }) }} style={{ margin: 'auto', marginTop: '26px', display: 'block' }}>
-            Retour à l'accueil
+          Retour à l'accueil
         </Button>
         <img
           src="https://mickeyblog.com/wp-content/uploads/2020/06/b6018dfa07dfe4a7c975d3cae0746a552c3adeda_hq-1.gif"
