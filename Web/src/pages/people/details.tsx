@@ -7,6 +7,8 @@ import GridFilm from "../../components/Grid/GridFilms";
 import GridSpecies from "../../components/Grid/GridSpecies";
 import GridStarShip from "../../components/Grid/GridStarShip";
 import GridVehicles from "../../components/Grid/GridVehicles";
+import { toast } from "react-toastify";
+import { StyledImage } from "../../css/stylesDetailsPage";
 
 function PeopleDetailPage() {
     const { id } = useParams()
@@ -20,7 +22,7 @@ function PeopleDetailPage() {
             console.log(response.data)
             setPeople(response.data)
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
             }
         }
         getPeople()
@@ -42,7 +44,7 @@ function PeopleDetailPage() {
                             <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{people.name}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={people.name} style={{height: 300, display: 'block', margin: 'auto'}} />
+                            <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={people.name} onError={(e: any) => {e.currentTarget.src = '/404.png'}}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <p>Date d&apos;anniversaire: {people.birth_year}</p>

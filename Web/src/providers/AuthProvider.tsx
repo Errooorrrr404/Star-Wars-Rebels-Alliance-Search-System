@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import axios from 'axios';
 import { apiPublic } from '../tools/instance';
 import { Navigate, useLocation } from 'react-router-dom';
 

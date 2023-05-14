@@ -1,18 +1,9 @@
-import { Toolbar, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, CssBaseline, AppBar, IconButton, Typography, Drawer, Button, Grid, Card, CardActions, CardContent, CardMedia } from "@mui/material";
-import React from "react";
-import { useAuth } from "../../providers/AuthProvider";
-import MenuIcon from '@mui/icons-material/Menu';
-import { Search } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
-import SearchPage from "../search/SearchPage";
+import { CssBaseline, Typography, Button, Grid, Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const drawerWidth = 240;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+
   window?: () => Window;
 }
 
@@ -25,7 +16,7 @@ const categories = [
   {
     title: 'Rechercher un personnage',
     image : 'https://starwars-visualguide.com/assets/img/characters/10.jpg',
-    link: '/characters'
+    link: '/people'
   },
   {
     title: 'Rechercher une planète',

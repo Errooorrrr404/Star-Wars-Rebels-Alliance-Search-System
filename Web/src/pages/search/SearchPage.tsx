@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Typography, TextField, CircularProgress, Card, CardContent } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Typography, TextField, Card, CardContent } from '@mui/material';
 import { apiAuth } from '../../tools/instance';
 import DisplayResponse from './Response/Response';
 import { ResultsFilmsEntity } from '../../interfaces/Films';
@@ -9,7 +9,6 @@ import { ResultsSpeciesEntity } from '../../interfaces/Species';
 import { ResultsStarshipsEntity } from '../../interfaces/Starships';
 import { ResultsVehiclesEntity } from '../../interfaces/Vehicles';
 import { debounce } from 'lodash';
-import { toast } from 'react-toastify';
 import { atom, useRecoilState } from 'recoil';
 import Loader from '../../components/Loader/Loader';
 
@@ -46,8 +45,12 @@ const SearchPage = (props: Props) => {
         const response = await apiAuth.get(`/${props.type}/search?q=${searchTerm}&page=${page}`);
         setSearchResults(response.data);
       } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.');
-        setSearchResults(null);
+        if (page !== '1') {
+          setPage('1');
+          setSearchResults(null);
+        } else {
+          await getData(searchTerm);
+        }
       } finally {
         setLoading(false);
       }
@@ -58,7 +61,6 @@ const SearchPage = (props: Props) => {
           setSearchResults(null);
           return;
       }
-      setPage('1');
       getData(searchItem)
     }, 700);
 
@@ -69,7 +71,7 @@ const SearchPage = (props: Props) => {
     return () => {
       delayDebounceFn.cancel();
     };
-  }, [searchTerm, page, props.type]);
+  }, [searchTerm, page, props.type, setPage]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);

@@ -1,18 +1,17 @@
-import { Avatar, Button, Card, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { SearchResult, pageState } from "../../SearchPage";
 import { Key } from "react";
 import { useNavigate } from "react-router-dom";
-import { baseURL } from "../../../../tools/instance";
 import { useRecoilState } from "recoil";
+import { StyledCard, StyledAvatar, StyledImage, StyledButton } from "./styles";
 
 interface Props {
     results: SearchResult | null;
 }
 
 
-
 const DisplayAnswerFilms = (props: Props) => {
-    const [page, setPage] = useRecoilState(pageState);
+    const [, setPage] = useRecoilState(pageState);
 
     const navigate = useNavigate();
     if (!props.results) {
@@ -76,10 +75,12 @@ const DisplayAnswerFilms = (props: Props) => {
               {
                 props.results.results && props.results.results.map((result: any, index: Key) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                        <Card style={{padding: 16, width: "100%"}}>
+                        <StyledCard>
                             <Grid container spacing={2} rowSpacing={2}>
                                 <Grid item xs={12}>
-                                    <Avatar alt={result.name} src={`https://starwars-visualguide.com/assets/img/films/${getEpisodeId(result.episode_id)}.jpg`} sx={{ width: 64, height: 64 }} />
+                                    <StyledAvatar alt={result.name} src={`https://starwars-visualguide.com/assets/img/films/${getEpisodeId(result.episode_id)}.jpg`}>
+                                        <StyledImage src={'https://starwars-visualguide.com/assets/img/placeholder.jpg'} alt={result.name} />
+                                    </StyledAvatar>
                                     <Typography variant="h4" component="h2" gutterBottom>
                                         {result.title}
                                     </Typography>
@@ -95,12 +96,12 @@ const DisplayAnswerFilms = (props: Props) => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Button variant="contained" color="primary" onClick={() => {showFilm(result.episode_id)}}>
+                                    <StyledButton variant="contained" color="primary" onClick={() => {showFilm(result.episode_id)}}>
                                         Voir plus
-                                    </Button>
+                                    </StyledButton>
                                 </Grid>
                             </Grid>
-                        </Card>
+                        </StyledCard>
                     </Grid>
                 ))
                 }

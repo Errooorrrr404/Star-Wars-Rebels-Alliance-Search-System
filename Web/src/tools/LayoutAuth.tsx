@@ -1,5 +1,4 @@
-import { AppBar, Container, Toolbar, Typography, Box } from "@mui/material";
-import AdbIcon from '@mui/icons-material/Adb';
+import { AppBar, Container, Toolbar, Box } from "@mui/material";
 
 import { Outlet, useNavigate } from "react-router-dom";
 

@@ -1,9 +1,10 @@
-import { Avatar, Button, Card, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { SearchResult, pageState } from "../../SearchPage";
 import { Key } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../../../tools/instance";
 import { useRecoilState } from "recoil";
+import { StyledAvatar, StyledButton, StyledCard, StyledImage } from "./styles";
 
 interface Props {
     results: SearchResult | null;
@@ -12,7 +13,7 @@ interface Props {
 
 
 const DisplayAnswerStarships = (props: Props) => {
-    const [page, setPage] = useRecoilState(pageState);
+    const [, setPage] = useRecoilState(pageState);
 
     const navigate = useNavigate();
     if (!props.results) {
@@ -62,10 +63,12 @@ const DisplayAnswerStarships = (props: Props) => {
               {
                 props.results.results && props.results.results.map((result: any, index: Key) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                        <Card style={{padding: 16, width: "100%"}}>
+                        <StyledCard >
                             <Grid container spacing={2} rowSpacing={2}>
                                 <Grid item xs={12}>
-                                    <Avatar alt={result.name} src={`https://starwars-visualguide.com/assets/img/${result.url.replace(baseURL, '')}.jpg`} sx={{ width: 100, height: 100 }} />
+                                    <StyledAvatar alt={result.name} src={`https://starwars-visualguide.com/assets/img/${result.url.replace(baseURL, '')}.jpg`}>
+                                        <StyledImage src={'https://starwars-visualguide.com/assets/img/placeholder.jpg'} alt={result.name} />
+                                    </StyledAvatar>
                                     <Typography variant="h4" component="h2" gutterBottom>
                                         {result.name}
                                     </Typography>
@@ -81,12 +84,12 @@ const DisplayAnswerStarships = (props: Props) => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Button variant="contained" color="primary" onClick={() => {navigate(result.url.replace(baseURL, ''), {replace: true})}}>
+                                    <StyledButton variant="contained" color="primary" onClick={() => {navigate(result.url.replace(baseURL, ''), {replace: true})}}>
                                         Voir plus
-                                    </Button>
+                                    </StyledButton>
                                 </Grid>
                             </Grid>
-                        </Card>
+                        </StyledCard>
                     </Grid>
                 ))
                 }

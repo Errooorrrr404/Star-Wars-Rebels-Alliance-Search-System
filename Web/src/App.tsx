@@ -2,7 +2,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { AuthProvider, RequireAuth, useAuth } from "./providers/AuthProvider";
+import { AuthProvider, RequireAuth } from "./providers/AuthProvider";
 import LogoutPage from "./pages/auth/LogoutPage";
 import LoginPage from "./pages/auth/LoginPage";
 import Layout from "./tools/Layout";
@@ -21,6 +21,7 @@ import FilmPage from "./pages/films";
 import PlanetsPage from "./pages/planets";
 import StarshipsPage from "./pages/starships";
 import NotFoundPage from "./pages/errors/NotFound";
+import Locked from "./pages/errors/Locked";
 
 
 export default function App() {
@@ -71,6 +72,8 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/logout" element={<LogoutPage />} />
         </Route>
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="/locked" element={<Locked />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>

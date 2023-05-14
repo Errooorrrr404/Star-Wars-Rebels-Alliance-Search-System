@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { apiAuthEmpty } from "../../tools/instance";
 import dayjs from "dayjs";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { CardContent, Typography } from "@mui/material";
 import { ResultsPeopleEntity } from "../../interfaces/People";
 import Loader from "../Loader/Loader";
+import { StyledCard, StyledImage, StyledButton } from "./styles";
+import { toast } from "react-toastify";
 
 const localizedFormat = require('dayjs/plugin/localizedFormat')
 require('dayjs/locale/fr')
@@ -24,7 +26,7 @@ function CardPeople(props: Props) {
                 const response = await apiAuthEmpty.get(`${query}`);
                 setResults(response.data);
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
                 setResults(null);
             }
         }
@@ -38,18 +40,18 @@ function CardPeople(props: Props) {
     return (
         <div>
             {results && (
-                <Card>
+                <StyledCard>
                     <CardContent>
-                    <img src={`https://starwars-visualguide.com/assets/img/characters/${query.split('/')[4]}.jpg`} alt={results.name} style={{width: '100%'}} onError={(e) => e.currentTarget.src = '/404.png'} />
+                        <StyledImage src={`https://starwars-visualguide.com/assets/img/characters/${query.split('/')[4]}.jpg`} alt={results.name} style={{width: '100%'}} onError={(e: any) => e.currentTarget.src = '/404.png'} />
                         <Typography variant="h6" fontWeight={"bold"}>{results.name}</Typography>
                         <Typography>Date d&apos;anniversaire: {results.birth_year}</Typography>
                         <Typography>Taille: {results.height}</Typography>
                         <Typography>Masse: {results.mass}</Typography>
-                        <Button variant="contained" color="primary" href={`/people/${query.split('/')[4]}`} style={{display: 'block', margin: 'auto', textAlign: 'center'}}>
+                        <StyledButton variant="contained" color="primary" href={`/people/${query.split('/')[4]}`}>
                             En savoir plus
-                        </Button>
+                        </StyledButton>
                     </CardContent>
-                </Card>
+                </StyledCard>
             )}
         </div>
     );

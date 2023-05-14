@@ -6,6 +6,8 @@ import GridFilm from "../../components/Grid/GridFilms";
 import GridPeople from "../../components/Grid/GridPeople";
 import { ResultPlanetsEntity } from "../../interfaces/Planets";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
+import { StyledImage } from "../../css/stylesDetailsPage";
 
 function PlanetsDetailPage() {
     const { id } = useParams()
@@ -19,7 +21,7 @@ function PlanetsDetailPage() {
             console.log(response.data)
             setPlanet(response.data)
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
             }
         }
         getPlanet()
@@ -41,7 +43,7 @@ function PlanetsDetailPage() {
                             <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{planet.name}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={planet.name} style={{height: 300, display: 'block', margin: 'auto'}} onError={(e) => {e.currentTarget.src = '/404.png'}} />
+                            <StyledImage src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={planet.name} onError={(e: any) => {e.currentTarget.src = '/404.png'}} />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="h6" fontWeight={"bold"}>Informations</Typography>

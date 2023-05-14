@@ -9,6 +9,8 @@ import GridPeople from "../../components/Grid/GridPeople";
 import dayjs from "dayjs";
 import { ResultsFilmsEntity } from "../../interfaces/Films";
 import GridPlanets from "../../components/Grid/GridPlanets";
+import { toast } from "react-toastify";
+import { StyledImage } from "../../css/stylesDetailsPage";
 
 function FilmsDetailPage() {
     const { id } = useParams()
@@ -31,7 +33,7 @@ function FilmsDetailPage() {
                     setEpisode(episode);
                 }
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
             }
         }
         getFilm()
@@ -53,7 +55,7 @@ function FilmsDetailPage() {
                             <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{film.title}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <img src={`https://starwars-visualguide.com/assets/img/films/${episode}.jpg`} alt={film.title} style={{width: '100%'}} />
+                            <StyledImage src={`https://starwars-visualguide.com/assets/img/films/${episode}.jpg`} alt={film.title} onError={(e: any) => {e.currentTarget.src = '/404.png'}}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Typography variant="h6" fontWeight={"bold"}>Informations</Typography>

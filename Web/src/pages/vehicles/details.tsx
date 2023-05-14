@@ -5,6 +5,8 @@ import { Card, CardContent, CircularProgress, Grid, Toolbar, Typography } from "
 import GridFilm from "../../components/Grid/GridFilms";
 import { ResultsVehiclesEntity } from "../../interfaces/Vehicles";
 import GridPeople from "../../components/Grid/GridPeople";
+import { toast } from "react-toastify";
+import { StyledImage } from "../../css/stylesDetailsPage";
 
 function VehiclesDetailPage() {
     const { id } = useParams()
@@ -18,7 +20,7 @@ function VehiclesDetailPage() {
             console.log(response.data)
             setPeople(response.data)
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
             }
         }
         getPeople()
@@ -40,7 +42,7 @@ function VehiclesDetailPage() {
                             <Typography variant="h4" fontWeight={"bold"} textAlign={'center'}>{people.name}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <img src={`https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`} alt={people.name} style={{height: 300, display: 'block', margin: 'auto'}} />
+                            <StyledImage src={`https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`} alt={people.name} onError={(e: any) => {e.currentTarget.src = '/404.png'}}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <p>Modèle: {people.model}</p>

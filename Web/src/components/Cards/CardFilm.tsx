@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { ResultsFilmsEntity } from "../../interfaces/Films";
 import { apiAuthEmpty } from "../../tools/instance";
 import dayjs from "dayjs";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { CardContent, Typography } from "@mui/material";
 import Loader from "../Loader/Loader";
+import { StyledCard, StyledImage, StyledButton } from "./styles";
+import { toast } from "react-toastify";
 
 const localizedFormat = require('dayjs/plugin/localizedFormat')
 require('dayjs/locale/fr')
@@ -33,7 +35,7 @@ function CardFilm(props: Props) {
                     setEpisode(episode);
                 }
             } catch (error) {
-                console.error('Une erreur s\'est produite lors de la recherche.', error);
+                toast.error('Une erreur s\'est produite lors de la recherche.');
                 setResults(null);
             }
         }
@@ -47,18 +49,18 @@ function CardFilm(props: Props) {
     return (
         <div>
             {results && (
-                <Card>
+                <StyledCard>
                     <CardContent>
-                    <img src={`https://starwars-visualguide.com/assets/img/films/${episode}.jpg`} alt={results.title} style={{width: '100%'}} onError={(e) => e.currentTarget.src = '/404.png'} />
+                    <StyledImage src={`https://starwars-visualguide.com/assets/img/films/${episode}.jpg`} alt={results.title} style={{width: '100%'}} onError={(e: any) => e.currentTarget.src = '/404.png'} />
                         <Typography variant="h6" fontWeight={"bold"}>{results.episode_id}. {results.title}</Typography>
                         <Typography>Date de sortie: {dayjs(results.release_date).locale('fr').format('LL')}</Typography>
                         <Typography>Réalisateur: {results.director}</Typography>
                         <Typography>Producteur: {results.producer}</Typography>
-                        <Button variant="contained" color="primary" href={`/films/${episode}`} style={{display: 'block', margin: 'auto', textAlign: 'center'}}>
+                        <StyledButton variant="contained" color="primary" href={`/films/${episode}`}>
                             En savoir plus
-                        </Button>
+                        </StyledButton>
                     </CardContent>
-                </Card>
+                </StyledCard>
             )}
         </div>
     );
