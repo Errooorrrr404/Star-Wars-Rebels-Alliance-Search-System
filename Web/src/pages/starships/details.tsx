@@ -19,16 +19,21 @@ function StarshipDetailsPage () {
   useEffect(() => {
     async function getStarship () {
       try {
-        const response = await apiAuth.get(`/starships/${id}`)
+        const response = await apiAuth().get(`/starships/${id}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + format + '.')
           setFormat('json')
           return
         }
         setStarship(response.data)
-      } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.')
-        navigate('/starships', { replace: true })
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
+        } else {
+          toast.error('Une erreur s\'est produite lors de la recherche.')
+          navigate('/starships', { replace: true })
+        }
       }
     }
     getStarship()

@@ -124,7 +124,8 @@ const jwtOptions = {
     nbf: true,
     exp: true,
     algorithm: 'HS256',
-    expiresIn: '1h'
+    expiresIn: '1h',
+    ttlSec: 14400, // 4 hours
 };
 
 

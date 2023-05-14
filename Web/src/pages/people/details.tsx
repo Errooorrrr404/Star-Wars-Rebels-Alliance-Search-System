@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { type ResultsPeopleEntity } from '../../interfaces/People'
 import { useEffect, useState } from 'react'
 import { apiAuth } from '../../tools/instance'
@@ -16,23 +16,30 @@ function PeopleDetailPage () {
   const { id } = useParams()
   const [people, setPeople] = useState<ResultsPeopleEntity | null>(null)
   const [format, setFormat] = useRecoilState(responseTypeState)
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getPeople () {
       try {
-        const response = await apiAuth.get(`/people/${id}`)
+        const response = await apiAuth().get(`/people/${id}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + format + '.')
           setFormat('json')
           return
         }
         setPeople(response.data)
-      } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.')
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
+        } else {
+          toast.error('Une erreur s\'est produite lors de la recherche.')
+          navigate('/people', { replace: true })
+        }
       }
     }
     getPeople()
-  }, [id, format, setFormat])
+  }, [id, format, setFormat, navigate])
 
   if (people == null) {
     return <>

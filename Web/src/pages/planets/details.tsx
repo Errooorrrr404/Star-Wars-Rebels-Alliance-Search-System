@@ -20,16 +20,21 @@ function PlanetsDetailPage () {
   useEffect(() => {
     async function getPlanet () {
       try {
-        const response = await apiAuth.get(`/planets/${id}`)
+        const response = await apiAuth().get(`/planets/${id}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + format + '.')
           setFormat('json')
           return
         }
         setPlanet(response.data)
-      } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.')
-        navigate('/planets', { replace: true })
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
+        } else {
+          toast.error('Une erreur s\'est produite lors de la recherche.')
+          navigate('/planets', { replace: true })
+        }
       }
     }
     getPlanet()

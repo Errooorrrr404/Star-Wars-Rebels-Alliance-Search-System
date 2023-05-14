@@ -46,7 +46,7 @@ async function authRoutes() {
                                     userId: user.id,
                                     version: api.version,
                                     aud: jwtOptions.aud,
-                                    iss: jwtOptions.iss
+                                    iss: jwtOptions.iss,
                                 },
                                 process.env.JWT_SECRET,
                                 jwtOptions,

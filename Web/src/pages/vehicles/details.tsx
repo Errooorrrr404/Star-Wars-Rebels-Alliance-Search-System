@@ -19,16 +19,21 @@ function VehiclesDetailPage () {
   useEffect(() => {
     async function getPeople () {
       try {
-        const response = await apiAuth.get(`/vehicles/${id}`)
+        const response = await apiAuth().get(`/vehicles/${id}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + format + '.')
           setFormat('json')
           return
         }
         setPeople(response.data)
-      } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.')
-        navigate('/vehicles', { replace: true })
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
+        } else {
+          toast.error('Une erreur s\'est produite lors de la recherche.')
+          navigate('/vehicles', { replace: true })
+        }
       }
     }
     getPeople()

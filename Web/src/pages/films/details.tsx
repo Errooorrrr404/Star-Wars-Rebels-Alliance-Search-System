@@ -24,7 +24,7 @@ function FilmsDetailPage () {
   useEffect(() => {
     async function getFilm () {
       try {
-        const response = await apiAuth.get(`/films/${id}?format=${format}`)
+        const response = await apiAuth().get(`/films/${id}?format=${format}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + format + '.')
           setFormat('json')
@@ -39,9 +39,14 @@ function FilmsDetailPage () {
         } else {
           setEpisode(episode)
         }
-      } catch (error) {
-        toast.error('Une erreur s\'est produite lors de la recherche.')
-        navigate('/films', { replace: true })
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
+        } else {
+          toast.error('Une erreur s\'est produite lors de la recherche.')
+          navigate('/films', { replace: true })
+        }
       }
     }
     getFilm()

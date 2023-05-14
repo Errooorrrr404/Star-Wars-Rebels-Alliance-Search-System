@@ -52,19 +52,24 @@ const SearchPage = (props: Props) => {
     async function getData (searchTerm: string) {
       try {
         setLoading(true)
-        const response = await apiAuth.get(`/${props.type}/search?q=${searchTerm}&page=${page}&format=${responseType}`)
+        const response = await apiAuth().get(`/${props.type}/search?q=${searchTerm}&page=${page}&format=${responseType}`)
         if (typeof response.data === 'string') {
           toast.warning('Impossible de récupérer les données en ' + responseType + '.')
           setResponseType('json')
           return
         }
         setSearchResults(response.data)
-      } catch (error) {
-        if (page !== '1') {
-          setPage('1')
-          setSearchResults(null)
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          localStorage.removeItem('token')
+          window.location.reload()
         } else {
-          await getData(searchTerm)
+          if (page !== '1') {
+            setPage('1')
+            setSearchResults(null)
+          } else {
+            await getData(searchTerm)
+          }
         }
       } finally {
         setLoading(false)
@@ -78,6 +83,7 @@ const SearchPage = (props: Props) => {
       }
       getData(searchItem)
     }, 700)
+
 
     if (searchTerm.length > 0) {
       delayDebounceFn(searchTerm)
