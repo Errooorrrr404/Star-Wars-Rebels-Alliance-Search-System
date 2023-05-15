@@ -1,67 +1,59 @@
+
 # Star Wars Rebels Alliance Search System
-Bienvenue dans l'Alliance Rebelle jeune Padawan!<br/>
-Nous avons besoin de personnes motivées pour défaire l'Empire.
 
-Les espions du seigneur Vader sont partout! <br/>
-Il nous faut donc un moyen de contrecarrer leurs plans.
+Bonjour, voici un condensé de mes connaissances en React.JS / Node.JS.
 
-C'est pourquoi nous avons décidé de vous confier une mission de la plus haute importance!
+Voici un descriptif des fonctionnalités utilisées par partie.
 
-Il s'agira, pour le bien de la rébellion, de créer une interface nous permettant de rechercher dans la banque de données de l'Empire.  <br/>
-L'un de nos espions a donné sa vie afin que nous puissions accéder à ces informations.
- 
-La base de données de l'Empire est accessible [à cette URL](https://swapi.dev/).
+## Partie 1: API
 
-## Objectifs de mission
+L'API a été faite en Node.JS et utilise Hapi comme demandé dans l'excercice.
 
-### Etape 1
+A chaque lancement, l'api fait un appel aux schémas de swapi pour apporter un contenu 100% dynamique au requêtes (si demain, swapi ajoute une nouvelle catégorie, elle sera déjà disponible sans MAJ de code, un simple redémarrage suffira)
 
-#### Obligatoire
- - Création d'un back-end en Node permettant de récupérer les données de SWAPI <br />
-   - Implémentation d'un endpoint recherchant tout type de données sur la base de données.
-   - L'API devra s'adapter aux besoins de la deuxième étape.
+Un système d'authentification par JWT a été ajouté pour n'autoriser la recherche qu'aux personnes connectées. Le jeton a une durée de vie de 4 heures. 
 
+Toutes les réponses sont des JSON (sauf si swapi renvoi une chaine de caractères -> cas possible pour le format **wookiee**) et les codes de retour sont affichés via le paquet **http-status**.
 
-#### Optionnel
- - Système d'authentification qui doit vérifier
-    - l'utilisateur: `Luke`
-    - password: `DadSucks`
- - L'utilisation d'[HAPI](https://hapi.dev/) car les développeur de la rébellion l'apprécie.
+La validation des body / query / path se font avec Joi.
+
+Les données sensibles (clés / iss, aud, etc...) sont dans un .env.
+
+Tout fonctionne sur un système de try / catch
+
+Toutes les méthodes non autorisées passent en 404
 
 
-### Etape 2
-#### Obligatoire
- - Création d'un front-end en ReactJS permettant de rechercher facilement sur le back-end créé au préalable. <br/>
-   - Création d'un champ de recherche
-   - Création d'un affichage par liste des résultats avec le nom
-   - Création d'une fiche détaillant le résultat où sera présentée les informations de base
-
-#### Optionnel
- - Faire des fiches ultra détaillées
-   - Afficher des fiches differentes en fonction du type de donnée
- - Implémentation d'un router
-   - Le router doit permettre d'accèder à n'importe quelle fiche
-   - Il peut permettre d'accèder directement au résultat d'une recherche
- - Implémentation d'un système de filtre
-   - Mettre en place un système de filtre par type de donnée (personnage, vaisseau, ...)
- - Mise en place d'un système d'authentification avec l'API
- - Utilisation de Redux
- - Utilisation du fonctionnel et de l'immutabilité
- - Un debounce pour la recherche
- - Mise en place de CSS modules
-
-#### Bonus
-Malgré les tensions entre l'Empire et le peuple Wookiee, il est étonnant de trouver dans leur base de données un moyen de traduire dans cette langue.
-
- - Permettre d'afficher les résultats en Wookiee
 
 
-Attention, l'utilisation de [swapi-node](https://www.npmjs.com/package/swapi-node) est prohibée, car l'application est surveillée par l'empire. <br/>
+## Partie 2: React.JS
+
+Le Front a été fait en React.JS et utilise typescript pour donner un type logique a chaque fonction.
+
+L'architecture se rapproche de celle proposée par Next.JS.
+
+Elle comporte une page de connexion, de déconnexion, d'erreur 404 et 403 si l'empire essaye de s'y connecter (tips: la redirection se fait après 3 échecs)
+
+L'ensemble du système est désigné avec MUI, et certains composants utilisent **emotion** comme module CSS.
+
+Tout a été pensé pour être 100% réutilisable, ce qui explique la création de plein de "petits" composants.
+
+Les pages devant être protégées (avec un accès restreints) sont entrourées par un AuthProvider.
+
+En cas d'erreur (jeton invalide, par exemple), les utilisateurs sont déconnectés et renvoyés sur la page de connexion.
+
+Le système de recherche utilise un debounce, et la pagination est fonctionnelle.
+
+La récupération des données peut se faire en **JSON** ou **Wookiee**. S'il y a une erreur dans la récupération des données en Wookiee, le système repasse en JSON. S'il y a une erreur en JSON, le système affiche une pop-up d'erreur (avec react-toastify)
+
+Pour stocker le state de ma recherche, ainsi que de la page, j'utilise Recoil.
+
+Tous les composants sont des fonctions.
+
+Les appels API sont réalisés avec **axios** et sont fait sous forme d'instances (plus facilement personnalisable)
+
+## Créé par
+
+- [@Benjamin BAPPEL](https://www.github.com/errooorrrr404)
 
 
-Afin que le service de renseignements de l'alliance puisse vérifier l'intégrité de votre code, il sera nécessaire de le rendre disponible sur un repo git accessible.
-
-## Conclusion
-Toute l'alliance Rebelle compte sur la réussite de cette mission.
-
-![May the force be with you](https://media.giphy.com/media/JDnaQ8qn0Myuk/200.gif)
