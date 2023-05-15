@@ -12,6 +12,8 @@ async function typeRoutes() {
 
   const schema = await getSchemaSWApi();
 
+  if (!schema) return [];
+
   return [
     {
       method: 'GET',

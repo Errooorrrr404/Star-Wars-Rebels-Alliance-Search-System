@@ -12,6 +12,8 @@ async function searchRoutes() {
 
   const schema = await getSchemaSWApi();
 
+  if (!schema) return [];
+
   return [
     {
       method: 'GET',

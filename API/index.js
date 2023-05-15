@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes');
 const { jwtOptions } = require('./tools/utils');
 const typeRoutes = require('./routes/typeRoutes');
 const errorsRoutes = require('./routes/errorsRoutes');
+const { getSchemaSWApi } = require('./tools/schema');
 
 require('dotenv').config();
 
@@ -17,6 +18,13 @@ require('dotenv').config();
 const start = async () => {
   try {
     console.log('Démarrage du serveur Hapi');
+
+    const schema = await getSchemaSWApi();
+
+    if (!schema) {
+      console.error('Erreur lors de la récupération du schéma SWAPI');
+      process.exit(1);
+    }
 
     const server = Hapi.server({
       port: process.env.PORT || 8080,
