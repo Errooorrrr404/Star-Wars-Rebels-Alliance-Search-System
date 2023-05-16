@@ -79,9 +79,9 @@ const arrayKeys = [
 
 function formateResponse(obj, format) {
   let copy = obj;
-  // if (format === 'wookiee') {
-  //     copy = replaceWookiesKeysToJSON(obj)
-  // }
+  if (format === 'wookiee') {
+      copy = replaceWookiesKeysToJSON(obj)
+  }
   const regexJSON = /https:\/\/swapi\.dev\/api\//g;
   const regexWookiee = /acaoaoakc:\/\/cohraakah\.wawoho\/raakah\//g;
   const replacement = `http://${process.env.HOST}:${process.env.PORT}/`;
